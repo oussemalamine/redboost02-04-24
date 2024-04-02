@@ -1,0 +1,96 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap");
+.not-found-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #044c54;
+  position: relative;
+  overflow: hidden;
+}
+.not-found-container-info {
+  width: 50%;
+  height: 55%;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+  color: white;
+  font-family: "Quicksand", sans-serif;
+  z-index: 1;
+}
+.codeError {
+  font-size: 10rem;
+  font-weight: 600;
+}
+.not-found-container-info h1 {
+  margin-bottom: 20px;
+}
+.not-found-container-info p {
+  margin-bottom: 20px;
+}
+.redirectBtn {
+  padding: 10px 20px;
+  background-color: white;
+  border-radius: 20px;
+  color: #044c54;
+  border: none;
+  text-transform: uppercase;
+}
+.redirectBtn:hover {
+  transform: scale(1.2);
+  transition: 0.5s;
+}
+.cloud1 {
+  width: 150px;
+  top: 0;
+  right: 20%;
+  z-index: 0;
+  animation: moveCloud 5s linear infinite;
+  position: absolute;
+}
+.cloud2 {
+  width: 120px;
+  top: 40px;
+  left: 20%;
+  opacity: 0.5;
+  z-index: 0;
+  animation: moveCloud 5s linear infinite;
+  position: absolute;
+}
+.cloud3 {
+  width: 300px;
+  top: 50%;
+  right: 0;
+  opacity: 0.5;
+  z-index: 0;
+  animation: moveCloud1 3s linear infinite;
+  position: absolute;
+}
+.cloud4 {
+  width: 200px;
+  top: 60%;
+  right: 70%;
+  z-index: 0;
+  animation: moveCloud 5s linear infinite;
+  position: absolute;
+  opacity: 0.5;
+}
+
+@keyframes moveCloud {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+@keyframes moveCloud1 {
+  0% {
+    transform: translateX(40%);
+  }
+  100% {
+    transform: translateX(-40%);
+  }
+}

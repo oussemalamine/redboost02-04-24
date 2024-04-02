@@ -1,0 +1,24 @@
+.review-inf {
+  min-width: 80%;
+  min-height: auto;
+  background-color: white;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  text-align: center;
+  line-height: 30px;
+}
+.review-inf h4 {
+  color: #044c54;
+  font-family: "Quicksand";
+}
+.btn-Review {
+  background-color: white;
+  border: none;
+  color: #044c54;
+  padding: 8px;
+  border-radius: 0.3em;
+  font-style: bold;
+  cursor: pointer;
+  font-weight: bold;
+  margin: 20px auto;
+}

@@ -1,0 +1,80 @@
+table {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  width: 100%;
+  box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.35);
+  border-collapse: collapse;
+  border-radius: 0.5rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: "----";
+}
+table thead,
+tr:not(:last-child) {
+  border-bottom: 1px solid #718ebf;
+}
+table td,
+table th {
+  text-align: center;
+  padding: 8px;
+}
+
+table tr:nth-child(even) {
+  background-color: hsl(220, 60%, 95%);
+}
+
+table tr:hover {
+  background-color: hsl(220, 60%, 90%);
+}
+
+table th,
+tfoot td {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  color: #718ebf;
+}
+.table-btn-group {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+.table-btn {
+  background-color: #044c54;
+  border: none;
+  color: white;
+  padding: 0.3em 0.9em;
+  border-radius: 0.3em;
+  font-style: bold;
+  cursor: pointer;
+  font-weight: bold;
+}
+.sorting-icon {
+  margin-left: 0.3em;
+}
+.table-sort {
+  position: relative;
+}
+.sort-copy {
+  position: sticky;
+}
+.delete-btn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+}
+.tab-btn {
+  padding: 5px 10px;
+  background-color: transparent;
+  border: 2px solid #203f8f;
+  border-radius: 20px;
+  color: #203f8f;
+  cursor: pointer;
+}
+.edit-input {
+  width: 70%;
+  padding: 5px 10px;
+  border-radius: 10px;
+  border: 1px solid #044c54;
+}

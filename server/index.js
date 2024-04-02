@@ -24,7 +24,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(
   cors({
-    origin: "https://660c7598858f4d30c10af1be--jazzy-valkyrie-468427.netlify.app",
+    origin: "https://jazzy-valkyrie-468427.netlify.app",
     methods: ["GET", "POST"], // Allow the client app to access the server
     credentials: true, // Allow cookies/session to be sent from the client
   })

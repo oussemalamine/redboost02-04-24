@@ -44,7 +44,7 @@ app.use(
     store: store, // Don't create session until something stored
     cookie: {
       secure: false, // Requires https
-      httpOnly: flase, // Prevents client side JS from reading the cookie7
+      httpOnly: false, // Prevents client side JS from reading the cookie7
       maxAge: 24 * 60 * 60 * 1000,
        // Cookie will live for 24H
     },

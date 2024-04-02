@@ -24,7 +24,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "https://660c7598858f4d30c10af1be--jazzy-valkyrie-468427.netlify.app",
     methods: ["GET", "POST"], // Allow the client app to access the server
     credentials: true, // Allow cookies/session to be sent from the client
   })
@@ -44,7 +44,7 @@ app.use(
     store: store, // Don't create session until something stored
     cookie: {
       secure: false, // Requires https
-      httpOnly: true, // Prevents client side JS from reading the cookie7
+      httpOnly: flase, // Prevents client side JS from reading the cookie7
       maxAge: 24 * 60 * 60 * 1000,
        // Cookie will live for 24H
     },

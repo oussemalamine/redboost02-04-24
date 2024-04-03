@@ -18,6 +18,7 @@ import axios from "axios";
 function App() {
   const [isLogged, setIsLogged] = useState(false);
   const [username, setUsername] = useState("");
+  const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
   axios.defaults.withCredentials = "true";
@@ -33,6 +34,7 @@ function App() {
         }
         setIsLoading(false); // Update loading state
         console.log("checkAuth : ", response.data);
+        setData(response.data);
       });
     };
     checkAuth();
@@ -67,7 +69,10 @@ function App() {
           <Route path="HR" element={<HR />} />
           <Route path="activities" element={<Activity />} />
           <Route path="marketing" element={<Marketing />} />
-          <Route path="user" element={<User />} />
+          <Route
+            path="user"
+            element={<User username={username} data={data} />}
+          />
         </Route>
 
         <Route path="/*" element={<PageNotFound />} />

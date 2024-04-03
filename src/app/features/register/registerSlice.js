@@ -7,6 +7,7 @@ const registerSlice = createSlice({
     email: "",
     phone: "",
     role: "",
+    department: "",
     password: "",
     confirmation: "",
   },

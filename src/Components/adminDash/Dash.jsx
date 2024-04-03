@@ -6,7 +6,7 @@ import Sidebar from "./Sidebar";
 import Main from "./Main";
 import axiosInstance from "../axiosInstance";
 import "./Dash.css";
-function Dash({ setIsLogged, isLogged }) {
+function Dash({ setIsLogged }) {
   const [selectedItem, setSelectedItem] = useState("Dashboard");
   const navigate = useNavigate();
 

@@ -17,6 +17,7 @@ const UserSchema = new mongoose.Schema({
     unique: true,
   },
   role: String,
+  department: String,
   password: {
     type: String,
     unique: true,
@@ -30,6 +31,34 @@ const UserSchema = new mongoose.Schema({
   validation: {
     type: Boolean,
     default: false,
+  },
+  adress: {
+    type: String,
+    default: "Undefined",
+  },
+  linkedIn: {
+    type: String,
+    default: "Undefined",
+  },
+  birthday: {
+    type: String,
+    default: "Undefined",
+  },
+  exp: {
+    type: String,
+    default: "Undefined",
+  },
+  matricule: {
+    type: String,
+    default: "Undefined",
+  },
+  cin: {
+    type: String,
+    default: "Undefined",
+  },
+  image: {
+    data: Buffer,
+    contentType: String,
   },
 });
 

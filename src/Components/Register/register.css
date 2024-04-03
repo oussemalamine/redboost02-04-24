@@ -31,6 +31,7 @@
   display: grid;
   justify-content: center;
   grid-template-columns: 500px;
+  /* background-color: #b4263c; */
   text-align: center;
   gap: 0.5rem;
 }
@@ -165,7 +166,7 @@ select {
   font-size: 16px;
   margin-bottom: 10px;
 }
-.phone-select-group {
+.select-group {
   display: flex;
   justify-content: space-between;
   background-color: white;
@@ -188,4 +189,5 @@ select {
 .input-group-r-select {
   flex: 1;
   justify-content: center;
+  padding: 10px;
 }

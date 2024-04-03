@@ -71,7 +71,6 @@
   cursor: pointer;
 }
 
-
 .header-list {
   width: 20%;
   height: 100%;
@@ -85,10 +84,10 @@
   border-radius: 50%;
   object-fit: contain;
 }
-.header-list .header-list-item{
-  width: 20%;
+.header-list .header-list-item {
+  width: 17%;
   height: 50%;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -96,7 +95,6 @@
   border-radius: 50%;
   margin-left: 10px;
   cursor: pointer;
-  font-size: 100%;
 }
 /*************** End header ****************/
 
@@ -215,12 +213,11 @@
 .main {
   grid-area: main;
   background-color: white;
-  padding: 10px;
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
-  overflow: auto;
+  overflow: hidden;
 }
 
 /* End Main */

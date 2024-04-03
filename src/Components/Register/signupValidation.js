@@ -21,6 +21,9 @@ export const signupValidation = Yup.object({
   role: Yup.string()
     .oneOf(["super admin", "hr", "logistics", "comm", "regional manager"])
     .required("Required"),
+  department: Yup.string()
+    .oneOf(["MACOM"]) // Add more department options if needed
+    .required("Required"),
   password: Yup.string()
     .required("Required")
     .min(8, "At least 8 characters")

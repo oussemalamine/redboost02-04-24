@@ -14,8 +14,8 @@ import {
   getSortedRowModel,
   getFilteredRowModel,
 } from "@tanstack/react-table";
-import HandleFileName from "./HandleFileName";
 import Review from "./Review";
+import FileNamePopUp from "./FileNamePopUp";
 const FILE_TYPE =
   "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8";
 const FILE_EXTENTION = ".xlsx";
@@ -164,13 +164,22 @@ const BasicTable = ({ setPrograms, program, programs }) => {
     setEditId(-1);
     setEditedData({});
   };
+  useEffect(() => {
+    if (showFileNameInput) {
+      document.body.classList.add("active");
+    } else {
+      document.body.classList.remove("active");
+    }
+    return () => {
+      document.body.classList.remove("active");
+    };
+  }, [showFileNameInput]);
   return (
     <>
       {showFileNameInput && (
-        <HandleFileName
+        <FileNamePopUp
           setShowFileNameInput={setShowFileNameInput}
-          showFileNameInput={showFileNameInput}
-          onSubmit={handleSubmitFileName}
+          handleSubmitFileName={handleSubmitFileName}
         />
       )}
       {showModal && (
@@ -226,140 +235,143 @@ const BasicTable = ({ setPrograms, program, programs }) => {
           </button>
         </div>
       </div>
-      <table>
-        <thead>
-          {tableInstance.getHeaderGroups().map((headerEl) => {
-            return (
-              <tr key={headerEl.id}>
-                {headerEl.headers.map((columnEl) => {
-                  if (columnEl.id === "checkbox") {
+      <div className="table-container">
+        <table>
+          <thead>
+            {tableInstance.getHeaderGroups().map((headerEl) => {
+              return (
+                <tr key={headerEl.id}>
+                  {headerEl.headers.map((columnEl) => {
+                    if (columnEl.id === "checkbox") {
+                      return (
+                        <th key={columnEl.id}>
+                          <input
+                            className="checkbox-header"
+                            type="checkbox"
+                            name=""
+                            id=""
+                            checked={selectAllChecked}
+                            onChange={handleAllCheck}
+                          />
+                        </th>
+                      );
+                    }
                     return (
-                      <th key={columnEl.id}>
-                        <input
-                          className="checkbox-header"
-                          type="checkbox"
-                          name=""
-                          id=""
-                          checked={selectAllChecked}
-                          onChange={handleAllCheck}
-                        />
+                      <th
+                        key={columnEl.id}
+                        colSpan={columnEl.colSpan}
+                        onClick={columnEl.column.getToggleSortingHandler()}
+                      >
+                        <div className="table-sort">
+                          {flexRender(
+                            columnEl.column.columnDef.header,
+                            columnEl.getContext()
+                          )}
+
+                          {
+                            {
+                              asc: <FaSortUp className="sorting-icon" />,
+                              desc: <FaSortDown className="sorting-icon" />,
+                            }[columnEl.column.getIsSorted() ?? null]
+                          }
+                        </div>
                       </th>
                     );
-                  }
-                  return (
-                    <th
-                      key={columnEl.id}
-                      colSpan={columnEl.colSpan}
-                      onClick={columnEl.column.getToggleSortingHandler()}
-                    >
-                      <div className="table-sort">
-                        {flexRender(
-                          columnEl.column.columnDef.header,
-                          columnEl.getContext()
-                        )}
-
-                        {
-                          {
-                            asc: <FaSortUp className="sorting-icon" />,
-                            desc: <FaSortDown className="sorting-icon" />,
-                          }[columnEl.column.getIsSorted() ?? null]
-                        }
-                      </div>
-                    </th>
-                  );
-                })}
-              </tr>
-            );
-          })}
-        </thead>
-        <tbody>
-          {tableInstance.getRowModel()?.rows?.map((rowEl, rowIndex) => {
-            const isEditing = editid === rowEl.original.id;
-            return (
-              <tr key={rowEl.id}>
-                {rowEl.getVisibleCells().map((cellEl, indexEl) => {
-                  if (indexEl === 0)
+                  })}
+                </tr>
+              );
+            })}
+          </thead>
+          <tbody>
+            {tableInstance.getRowModel()?.rows?.map((rowEl, rowIndex) => {
+              const isEditing = editid === rowEl.original.id;
+              return (
+                <tr key={rowEl.id}>
+                  {rowEl.getVisibleCells().map((cellEl, indexEl) => {
+                    if (indexEl === 0)
+                      return (
+                        <td key={cellEl.id}>
+                          <input
+                            className="checkbox-input"
+                            type="checkbox"
+                            checked={
+                              checked.includes(cellEl.id) || selectAllChecked
+                            }
+                            onChange={() => {
+                              handleCheck(cellEl.id);
+                              handleCheckRows(rowEl.original);
+                            }}
+                          />
+                        </td>
+                      );
                     return (
                       <td key={cellEl.id}>
-                        <input
-                          className="checkbox-input"
-                          type="checkbox"
-                          checked={
-                            checked.includes(cellEl.id) || selectAllChecked
-                          }
-                          onChange={() => {
-                            handleCheck(cellEl.id);
-                            handleCheckRows(rowEl.original);
-                          }}
-                        />
+                        {isEditing ? (
+                          <input
+                            type="text"
+                            className="edit-input"
+                            value={editedData[cellEl.column.id] || ""}
+                            onChange={(e) =>
+                              setEditedData({
+                                ...editedData,
+                                [cellEl.column.id]: e.target.value,
+                              })
+                            }
+                          />
+                        ) : (
+                          flexRender(
+                            cellEl.column.columnDef.cell,
+                            cellEl.getContext()
+                          )
+                        )}
                       </td>
                     );
-                  return (
-                    <td key={cellEl.id}>
-                      {isEditing ? (
-                        <input
-                          type="text"
-                          className="edit-input"
-                          value={editedData[cellEl.column.id] || ""}
-                          onChange={(e) =>
-                            setEditedData({
-                              ...editedData,
-                              [cellEl.column.id]: e.target.value,
-                            })
-                          }
-                        />
-                      ) : (
-                        flexRender(
-                          cellEl.column.columnDef.cell,
-                          cellEl.getContext()
-                        )
-                      )}
-                    </td>
-                  );
-                })}
-                <td>
-                  <button
-                    className="delete-btn"
-                    onClick={() => handleDeleteRow(rowIndex)}
-                  >
-                    <FaRegTrashAlt style={{ color: "red" }} />
-                  </button>
-                </td>
-                <td>
-                  {isEditing ? (
+                  })}
+                  <td>
                     <button
-                      className="update-btn tab-btn"
-                      onClick={handleUpdateRow}
+                      className="delete-btn"
+                      onClick={() => handleDeleteRow(rowIndex)}
                     >
-                      Update
+                      <FaRegTrashAlt style={{ color: "red" }} />
                     </button>
-                  ) : (
-                    <button
-                      className="update-btn tab-btn"
-                      onClick={() => handleEditRow(rowEl.original.id)}
-                    >
-                      Edit
-                    </button>
-                  )}
-                </td>
-                <td>
-                  {isEditing ? null : (
-                    <button
-                      onClick={() => {
-                        setShowModal(!showModal);
-                        setReviewData(rowEl.original.id);
-                      }}
-                      className="review-btn tab-btn"
-                    >
-                      Review
-                    </button>
-                  )}
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+                  </td>
+                  <td>
+                    {isEditing ? (
+                      <button
+                        className="update-btn tab-btn"
+                        onClick={handleUpdateRow}
+                      >
+                        Update
+                      </button>
+                    ) : (
+                      <button
+                        className="update-btn tab-btn"
+                        onClick={() => handleEditRow(rowEl.original.id)}
+                      >
+                        Edit
+                      </button>
+                    )}
+                  </td>
+                  <td>
+                    {isEditing ? null : (
+                      <button
+                        onClick={() => {
+                          setShowModal(!showModal);
+                          setReviewData(rowEl.original.id);
+                        }}
+                        className="review-btn tab-btn"
+                      >
+                        Review
+                      </button>
+                    )}
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+
       <div className="table-btn-group">
         <button
           className="table-btn"

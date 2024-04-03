@@ -1,11 +1,32 @@
+.review-modal {
+  width: 40%;
+  height: 570px;
+  position: absolute;
+  top: 20%;
+  right: 20%;
+  transform: translate(-15%, -10%);
+  background-color: #044c54;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 200;
+  border-radius: 5px;
+  color: white;
+}
+.review-modal .user-image {
+  width: 100px;
+}
 .review-inf {
-  min-width: 80%;
-  min-height: auto;
+  width: 450px;
+  min-height: 100px;
   background-color: white;
   border-radius: 10px;
   margin-bottom: 15px;
   text-align: center;
   line-height: 30px;
+  color: black;
+  overflow: auto;
 }
 .review-inf h4 {
   color: #044c54;
@@ -20,5 +41,5 @@
   font-style: bold;
   cursor: pointer;
   font-weight: bold;
-  margin: 20px auto;
+  margin: 5px auto;
 }

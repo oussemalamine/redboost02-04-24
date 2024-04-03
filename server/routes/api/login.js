@@ -22,6 +22,7 @@ router.post("/login", async (req, res, next) => {
           });
         }
         req.session.username = user.username;
+        req.session.loginTime = new Date().toISOString(); 
         return res.send({ user, info });
       });
     } catch (error) {

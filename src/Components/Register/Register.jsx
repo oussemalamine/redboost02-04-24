@@ -19,6 +19,7 @@ const initialValues = {
   email: "",
   phone: "",
   role: "",
+  department: "",
   password: "",
   confirmation: "",
 };
@@ -31,7 +32,7 @@ function Register() {
     validationSchema: signupValidation,
     onSubmit: async (values, actions) => {
       try {
-        console.log(values); /* these are the values send by the form  */
+        console.log(values);
 
         const sendData = await axiosInstance.post("/register", values);
         setError("");
@@ -50,7 +51,6 @@ function Register() {
   const handleStore = useDebouncedCallback((key, value) => {
     dispatch(handleRegister({ key, value }));
   }, 250);
-
   return (
     <div className="formContainer2">
       <div className="register-form">
@@ -115,8 +115,8 @@ function Register() {
               <Tooltip state={true} error={errors.email} />
             )}
           </div>
-          <div className="phone-select-group">
-            <div
+          <div className="select-group">
+            {/* <div
               className={
                 errors.phone && touched.phone
                   ? "input-group-r error-r"
@@ -137,7 +137,7 @@ function Register() {
               {errors.phone && touched.phone && (
                 <Tooltip state={true} error={errors.phone} />
               )}
-            </div>
+            </div> */}
             <div
               className={
                 errors.role && touched.role
@@ -166,8 +166,53 @@ function Register() {
                 <Tooltip state={true} error={errors.role} />
               )}
             </div>
+            <div
+              className={
+                errors.role && touched.role
+                  ? "input-group-r error-r"
+                  : "input-group-r input-group-r-select"
+              }
+            >
+              <select
+                name="department"
+                value={values.department}
+                onChange={(e) => {
+                  handleChange(e);
+                  handleStore("department", e.target.value);
+                }}
+              >
+                <option value="" disabled>
+                  Select your department
+                </option>
+                <option value="MACOM">MACOM</option>
+              </select>
+              {errors.department && touched.department && (
+                <Tooltip state={true} error={errors.department} />
+              )}
+            </div>
           </div>
-
+          <div
+            className={
+              errors.phone && touched.phone
+                ? "input-group-r error-r"
+                : "input-group-r"
+            }
+          >
+            <FaPhone className="icon-r" />
+            <input
+              type="tel"
+              placeholder="Phone Number"
+              name="phone"
+              value={values.phone}
+              onChange={(e) => {
+                handleChange(e);
+                handleStore("phone", e.target.value);
+              }}
+            />
+            {errors.phone && touched.phone && (
+              <Tooltip state={true} error={errors.phone} />
+            )}
+          </div>
           <div
             className={
               errors.password && touched.password

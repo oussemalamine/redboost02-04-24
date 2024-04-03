@@ -1,16 +1,10 @@
 import React, { useEffect, useState } from "react";
 import BasicTable from "../databaseTable/BasicTable";
-import {
-  MenuItem,
-  Tooltip,
-  Select,
-  FormControl,
-  InputLabel,
-  Box,
-} from "@mui/material";
 import "./Database.css";
 import { useLocalStorage } from "../useLocalStorage";
+import Tooltip from "../Register/Tooltip";
 const PROGRAMS_KEY = "__0prgramsKey";
+
 function Database() {
   const [programs, setPrograms] = useLocalStorage(PROGRAMS_KEY, []);
   const [select, setSelect] = useState("");
@@ -22,23 +16,22 @@ function Database() {
     if (name.trim() === "") return;
     if (exist(name)) {
       setError(true);
+      console.log("program exist");
       return;
     }
     const newPrograms = [...programs, { name, data: [] }];
     setPrograms(newPrograms);
     setInputProgram("");
   }
+
   function exist(name) {
-    let test = false;
-    programs.forEach((program) => {
-      if (program.name === name) test = true;
-    });
-    return test;
+    return programs.some((program) => program.name === name);
   }
+
   function searchData(programName) {
-    const program = programs.find((element) => element.name === programName);
-    return program;
+    return programs.find((element) => element.name === programName);
   }
+
   const handleDeleteProgram = (programName) => {
     const updatedPrograms = programs.filter(
       (program) => program.name !== programName
@@ -46,10 +39,12 @@ function Database() {
     setPrograms(updatedPrograms);
     setSelect("");
   };
+
   const deleteAllPrograms = () => {
     setPrograms([]);
     setSelect("");
   };
+
   return (
     <div className="database-container">
       <div className="program-select">
@@ -59,48 +54,26 @@ function Database() {
         <button className="btn" onClick={() => handleDeleteProgram(select)}>
           Delete Program
         </button>
-        <Tooltip
-          open={error}
-          title={error ? "Program Exist" : false}
-          arrow
-          placement="top"
-        >
-          <Box>
-            <FormControl size="small">
-              <InputLabel id="demo-simple-select-label">
-                Select a Program
-              </InputLabel>
-              <Select
-                variant="outlined"
-                sx={{
-                  minWidth: 200,
-                  textAlign: "center",
-                  "& .MuiOutlinedInput-notchedOutline": {
-                    borderColor: "#044c54",
-                    borderWidth: 2,
-                  },
-                }}
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={select}
-                label="Select a Program"
-                onChange={(e) => setSelect(e.target.value)}
-              >
-                {programs.map((program, index) => {
-                  return (
-                    <MenuItem
-                      className="program-item"
-                      key={index}
-                      value={program.name}
-                    >
-                      {program.name}
-                    </MenuItem>
-                  );
-                })}
-              </Select>
-            </FormControl>
-          </Box>
-        </Tooltip>
+        {/* {error && <div className="error">Program Exist</div>} */}
+        <div>
+          {/* <label htmlFor="selectProgram">Select a Program</label> */}
+          {error && <Tooltip state={true} error="Program already exists" />}
+          <select
+            id="selectProgram"
+            className="selectProgram"
+            value={select}
+            onChange={(e) => setSelect(e.target.value)}
+          >
+            <option value="" disabled>
+              Select a Program
+            </option>
+            {programs.map((program, index) => (
+              <option key={index} value={program.name}>
+                {program.name}
+              </option>
+            ))}
+          </select>
+        </div>
         <input
           type="text"
           value={inputProgram}

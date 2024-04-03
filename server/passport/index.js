@@ -58,7 +58,7 @@ passport.use(
     },
     async (req, email, password, cb) => {
       try {
-        const { username, phone, role } = req.body;
+        const { username, phone, role, department } = req.body;
         console.log("req.body =>", req.body);
         const existingUsername = await UserModel.findOne({ username });
         if (existingUsername) {
@@ -80,6 +80,7 @@ passport.use(
           email,
           phone,
           role,
+          department,
           password: hashPassword,
           confirmation: hashPassword,
         });

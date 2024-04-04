@@ -17,7 +17,7 @@ function Dash({ setIsLogged }) {
   useEffect(() => {
     const checkAuthStatus = async () => {
       try {
-        const response = await axiosInstance.get("/login");
+        const response = await axiosInstance.post("/checkAuth");
         const authenticated = response.data.authenticated;
         if (!authenticated) {
           setIsLogged(false);

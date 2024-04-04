@@ -34,7 +34,7 @@ function App() {
           setIsLogged(false);
           setUsername("");
         }
-        setIsLoading(false); // Update loading state
+        setIsLoading(true); // Update loading state
         console.log("checkAuth : ", response.data);
         setData(response.data);
       });

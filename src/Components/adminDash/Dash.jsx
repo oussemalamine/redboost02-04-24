@@ -29,10 +29,10 @@ function Dash({ setIsLogged }) {
       }
     };
     checkAuthStatus();
-    const interval = setInterval(() => {
-      checkAuthStatus();
-    }, 30000);
-    return () => clearInterval(interval);
+    // const interval = setInterval(() => {
+    //   checkAuthStatus();
+    // }, 30000);
+    // return () => clearInterval(interval);
   }, [navigate, setIsLogged]);
   return (
     <div className="dashContainer">

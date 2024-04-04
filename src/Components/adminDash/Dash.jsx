@@ -24,6 +24,7 @@ function Dash({ setIsLogged }) {
           navigate("/login");
         }
       } catch (error) {
+        setIsLogged(false);
         console.error("Error checking authentication status:", error);
       }
     };

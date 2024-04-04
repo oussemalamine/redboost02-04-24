@@ -24,7 +24,9 @@ function App() {
   axios.defaults.withCredentials = "true";
   useEffect(() => {
     const checkAuth = async () => {
+
       await axiosInstance.get("/login").then((response) => {
+        setIsLoading(true); // Set loading state to true
         if (response.data.authenticated) {
           setIsLogged(true);
           setUsername(response.data.username);

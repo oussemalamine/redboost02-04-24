@@ -25,13 +25,13 @@ function App() {
   useEffect(() => {
     const checkAuth = async () => {
 
-      await axiosInstance.get("/login").then((response) => {
+      await axiosInstance.post("/checkAuth").then((response) => {
         setIsLoading(true); // Set loading state to true
         if (response.data.authenticated) {
           setIsLogged(true);
           setUsername(response.data.username);
         } else {
-          setIsLogged(true);
+          setIsLogged(false);
           setUsername("");
         }
         setIsLoading(false); // Update loading state

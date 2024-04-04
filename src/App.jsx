@@ -31,10 +31,10 @@ function App() {
           setIsLogged(true);
           setUsername(response.data.username);
         } else {
-          setIsLogged(false);
+          setIsLogged(true);
           setUsername("");
         }
-        setIsLoading(true); // Update loading state
+        setIsLoading(false); // Update loading state
         console.log("checkAuth : ", response.data);
         setData(response.data);
       });

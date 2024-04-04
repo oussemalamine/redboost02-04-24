@@ -58,7 +58,7 @@ app.use(passport.session());
 // Routes
 app.post("/register", signupRoute);
 app.post("/login", loginRoute);
-app.get("/login", checkAuthRoute);
+app.post("/checkAuth", checkAuthRoute);
 app.get("/logout", logoutRoute);
 app.get("/users", usersRoute);
 app.put("/users/:userId", UpdateUser);

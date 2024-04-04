@@ -13,7 +13,7 @@ router.get("/logout", (req, res) => {
       console.error("Error destroying session:", err);
       res.status(500).send("Internal Server Error");
     } else {
-      res.clearCookie("sessionId");
+      res.clearCookie("1P_JAR");
       res.status(200).json({ message: "Logout successful" }); // Clear the session cookie (replace "connect.sid" with your session cookie name if it's different)
     }
   });
